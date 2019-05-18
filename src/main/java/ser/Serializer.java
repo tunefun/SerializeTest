@@ -16,6 +16,7 @@ public abstract class Serializer extends Field {
     void init(){
         convertMap = collectFieldField();
         computerMap = generateComputeField();
+        isInit = true;
     }
     private Map<String, Field> collectFieldField(){
         Map<String, Field> map = new HashMap<String, Field>();
@@ -55,6 +56,7 @@ public abstract class Serializer extends Field {
         return map;
     }
 
+    @Override
     public Object toRepresentation(Object in) {
         if (!isInit){
             init();
