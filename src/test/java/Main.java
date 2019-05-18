@@ -2,7 +2,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ser.Field;
 import ser.Serializer;
-import ser.impl.FullSerializer;
 import ser.impl.fields.ListField;
 
 
@@ -18,12 +17,12 @@ public class Main {
         System.out.println("-----------------------------------------------------------------");
 
         Serializer ser1 = new TaskSerializer();
-        Object serialized = ser1.toRepresentation(task1);
+        Object serialized = ser1.serialize(task1).toMapOrList();
         System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(serialized));
         System.out.println("-----------------------------------------------------------------");
 
         Field ser2 = new ListField(new BasicTaskInfoSerializer());
-        Object serData2 = ser2.toRepresentation(new Task[]{task1, task2});
+        Object serData2 = ser2.serialize(new Task[]{task1, task2}).toMapOrList();
         System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(serData2));
     }
 }
